@@ -1,33 +1,44 @@
 # Kafka-docker-example
 
-Descarga Kafdrop
+## Descarga Kafdrop
 
 ```
 wget https://github.com/obsidiandynamics/kafdrop/releases/download/3.31.0/kafdrop-3.31.0.jar
 ```
 
-Descarga Kafka y descomprime el tgz
+### Descarga Kafka y descomprime el tgz
 ``` 
 tar -xzf kafka-3.5.0-src.tgz
 ```
 
-Inicia zookeper
+## Inicia zookeper
 ```
 bin/zookeeper-server-start.sh config/zookeeper.properties
 ```
 
-Inicia Kafka
+## Inicia Kafka
 ```
 bin/kafka-server-start.sh config/server.properties
 ```
 
-Si kafka no inicia, dentro de la carpeta de kafka, ejecuta el siguiente comando y después el comando de arriba
+### Si kafka no inicia, dentro de la carpeta de kafka, ejecuta el siguiente comando y después el comando de arriba
 ```
 ./gradlew jar -PscalaVersion=2.13.10
 ```
+## Iniciar kafka con kraft (no se necesita zookeeper)
+```
+bin/kafka-storage.sh random-uuid
+```
+```
+bin/kafka-storage.sh format -t <random-uuid> -c config/kraft/server.properties
+```
+```
+bin/kafka-server-start.sh config/kraft/server.properties
+```
 
-Inicia kafdrop 
+## Inicia kafdrop 
 ```
 java --add-opens=java.base/sun.nio.ch=ALL-UNNAMED -jar kafdrop-3.31.0.jar --kafka.brokerConnect=localhost:9092
 ```
+
 
